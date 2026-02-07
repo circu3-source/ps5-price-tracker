@@ -22,7 +22,10 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install pytest pytest-asyncio browser-use python-dotenv langchain-openai
+        # 1. 強制使用 python -m pip 來安裝，確保路徑一致
+        python -m pip install pytest pytest-asyncio browser-use python-dotenv langchain-openai playwright
+        
+        # 2. 執行 playwright 安裝指令
         python -m playwright install chromium --with-deps 
 
     - name: Run Pytest
