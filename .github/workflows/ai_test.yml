@@ -23,7 +23,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest pytest-asyncio browser-use python-dotenv langchain-openai
-        playwright install chromium --with-deps 
+        python -m playwright install chromium --with-deps 
 
     - name: Run Pytest
       env:
