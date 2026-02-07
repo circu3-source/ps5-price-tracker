@@ -1,13 +1,28 @@
-- name: Set up Python
+name: AI Price Tracker Autotest
+
+on:
+  push:
+    branches: [ main ]
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11' # 從 3.10 改成 3.11 或 3.12
+        python-version: '3.11'
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
         pip install pytest pytest-asyncio browser-use python-dotenv langchain-openai
-        # 雲端 Linux 環境必須執行這一行，否則 AI 找不到瀏覽器
         playwright install chromium --with-deps 
 
     - name: Run Pytest
